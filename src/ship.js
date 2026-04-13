@@ -1,9 +1,10 @@
 export class ship {
-    constructor(name, lives) {
+    constructor(name, lives, ) {
         this.name = name;
         this.lives = lives;
         this.hits = 0;
         this.sunk = false;
+        this.location = [];
     }
 
     getsHit() {
@@ -14,6 +15,6 @@ export class ship {
     
     isSunk() {
         if (this.hits === this.lives) this.sunk = true;
-        return;
+        return this.sunk;
     }
 }
