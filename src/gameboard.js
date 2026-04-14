@@ -1,17 +1,18 @@
 import { ship } from "./ship.js";
 export class gameboard {
     constructor() {
-        this.board = new Array(100).fill({shipName: null, isHit: false});
+        this.board = Array.from({length: 100}, () => ({shipName: null, isHit: false}));
+        this.ships = {};
+        this.missedShots = [];
     }
 
     // need to write function for creating ship and placing it
     // create ship
     placeShip(name, start, dir) {
-        let vessel;
-        if (name === 'aircraft') vessel = new ship(name, 5);
-        if (name === 'battleship') vessel = new ship(name, 4);
-        if (name === 'cruiser' || name === 'sub') vessel = new ship(name, 3);
-        if (name === 'destroyer') vessel = new ship(name, 2);
+        if (name === 'aircraft') this.ships[name] = new ship(name, 5);
+        if (name === 'battleship') this.ships[name] = new ship(name, 4);
+        if (name === 'cruiser' || name === 'sub') this.ships[name] = new ship(name, 3);
+        if (name === 'destroyer') this.ships[name] = new ship(name, 2);
 
         // 'row ends'
         let rowEnds = [];
@@ -24,43 +25,48 @@ export class gameboard {
         if (dir === 'lat') {
             // check that it doesn't wrap rows
             for (let i = 0; i < rowEnds.length; i++) {
-                if ((start + vessel.lives) <= rowEnds[i] && start > rowEnds[i - 1]) {
+                if ((start + this.ships[name].lives) <= rowEnds[i] && start >= rowEnds[i] - 9) {
                     validPosition = true;
                     break;
                 };
             }
             // check that it doesn't collide
-            for (let i = 0; i < vessel.lives; i++) {
+            for (let i = 0; i < this.ships[name].lives; i++) {
                 if (this.board[start + i].shipName) return validPosition = false;
             }
             // place ship
             if (validPosition) {
-                for (let i = 0; i < vessel.lives; i++) {
+                for (let i = 0; i < this.ships[name].lives; i++) {
                     this.board[start + i].shipName = name;
                 };
             };
         };
 
         if (dir === 'vert') {
-            if (start + (vessel.lives * 10) < 100) {
-                for (let i = 0; i < (vessel.lives * 10); i += 10) {
+            if (start + (this.ships[name].lives * 10) < 100) {
+                validPosition = true;
+                for (let i = 0; i < (this.ships[name].lives * 10); i += 10) {
                     if (this.board[start + i].shipName) {
                         return validPosition = false;
                     };
                 };
-                for (let i = 0; i < (vessel.lives * 10); i += 10) {
+                for (let i = 0; i < (this.ships[name].lives * 10); i += 10) {
                     this.board[start + i].shipName = name;
                     };
                 };
-                return validPosition = true;
+                return validPosition;
             };
-            return validPosition;
         }
 
-
-        // need to handle collisions at each location
-
-        // note for Claude: i stopped this function here and decided to get assistance from you before i went too far down a path that didn't feel right
+        // receivesHit(coordinates) checks if shot is a hit/miss and logs missed shot or hit on ship
+        receivesHit(coordinates) {
+            if (this.board[coordinates].isHit === true) return false;
+            this.board[coordinates].isHit = true;
+            if (this.board[coordinates].shipName) {
+                let target = this.ships[this.board[coordinates].shipName];
+                return target.getsHit();
+            } else this.missedShots.push(coordinates);
+        }
 
     // note to self: needs to receiveHit() where coordinates are checked, and either missed shot is recorded or ship logs hit
 

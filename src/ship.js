@@ -10,11 +10,11 @@ export class ship {
     getsHit() {
         this.hits++;
         this.isSunk();
-        return;
+        return true;
     }
     
     isSunk() {
         if (this.hits === this.lives) this.sunk = true;
-        return this.sunk;
+        return;
     }
 }
