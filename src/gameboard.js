@@ -73,6 +73,7 @@ export class gameboard {
                 let target = this.ships[this.board[coordinates].shipName];
                 return target.getsHit();
             } else this.missedShots.push(coordinates);
+            return true;
         }
 
         // allSunk() checks if all ships on board are sunk or not
