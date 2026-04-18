@@ -1,4 +1,4 @@
-const gameDisplay = document.createElement('div');
+export const gameDisplay = document.createElement('div');
 document.body.append(gameDisplay);
 
 export function displayPlayerBoard(activePlayer) {
