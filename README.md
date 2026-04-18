@@ -14,7 +14,6 @@ ESLint install
 
     npm init @eslint/config@latest
 
-
 Prettier install
 
     npm install --save-dev --save-exact prettier
