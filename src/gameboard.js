@@ -65,21 +65,21 @@ export class gameboard {
             }
         }
 
-        // receivesHit(coordinates) checks if shot is a hit/miss and logs missed shot or hit on ship
-        receivesHit(coordinates) {
-            if (this.board[coordinates].isHit === true) return false;
-            this.board[coordinates].isHit = true;
-            if (this.board[coordinates].shipName) {
-                let target = this.ships[this.board[coordinates].shipName];
-                return target.getsHit();
-            } else this.missedShots.push(coordinates);
-            return true;
-        }
+    // receivesHit(coordinates) checks if shot is a hit/miss and logs missed shot or hit on ship
+    receivesHit(coordinates) {
+        if (this.board[coordinates].isHit === true) return false;
+        this.board[coordinates].isHit = true;
+        if (this.board[coordinates].shipName) {
+            let target = this.ships[this.board[coordinates].shipName];
+            return target.getsHit();
+        } else this.missedShots.push(coordinates);
+        return true;
+    }
 
-        // allSunk() checks if all ships on board are sunk or not
-        allSunk() {
-            const shipsArray = Object.values(this.ships);
-            return shipsArray.every(obj => obj.sunk === true);
-        }
+    // allSunk() checks if all ships on board are sunk or not
+    allSunk() {
+        const shipsArray = Object.values(this.ships);
+        return shipsArray.every(obj => obj.sunk === true);
+    }
 
 }

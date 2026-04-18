@@ -52,16 +52,26 @@ export function displayCpuBoard(cpu, player) {
                 cpu.gameboard.receivesHit(index);
 
                 // re render cpu board
-                displayCpuBoard();
+                displayCpuBoard(cpu, player);
                 
                 // check for gameover
-                if (cpu.gameboard.allSunk()) alert('Game Over! Player Wins!');
+                if (cpu.gameboard.allSunk()) {
+                    alert('Game Over! Player Wins!');
+                    return;
+                }
+                
                 
                 // cpu shoots player
                 player.randomCpuHit();
 
+                // re render player board
+                displayPlayerBoard(player);
+
                 // check for gameover
-                if (player.gameboard.allSunk()) alert('Game Over! The CPU wins!')
+                if (player.gameboard.allSunk()) {
+                    alert('Game Over! The CPU wins!');
+                    return;
+                }
                 });
             };
         })
