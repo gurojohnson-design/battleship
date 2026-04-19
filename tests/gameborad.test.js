@@ -8,8 +8,8 @@ test('new gameboard creates an array with length 100', () => {
 
 test('new gameboard is full of objects', () => {
     const play = new gameboard();
-    expect(play.board[0]).toBe({shipName: null, isHit: false});
-    expect(play.board[99]).toBe({shipName: null, isHit: false});
+    expect(play.board[0]).toEqual({shipName: null, isHit: false});
+    expect(play.board[99]).toEqual({shipName: null, isHit: false});
 })
 
 
@@ -31,7 +31,7 @@ test('locations track if they have been shot', () => {
     
 })
 
-test('locations track if they have been shot', () => {
+test('another location accurately tracks shot', () => {
     const play = new gameboard();
 
     play.receivesHit(4);
@@ -51,17 +51,14 @@ test('allSunk() ignores unsunk ships', () => {
     expect(play.allSunk()).toBe(false);
 })
 
-
-// working on writing the test for is a ship is sunk then allSunk() returns 'true'. what is below definitely wont work but its a start
-
-
 test('a sunk ship trips allSunk()', () => {
     const play = new gameboard();
         play.placeShip('sub', 3, 'lat');
-        play.ships.sub.sunk = true;
+        play.receivesHit(3);
+        play.receivesHit(4);
+        play.receivesHit(5);
 
-    play.receivesHit(4);
-    expect(play.board[4].isHit).toBe(true);
+    expect(play.allSunk()).toBe(true);
 })
 
 
