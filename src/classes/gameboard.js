@@ -12,9 +12,19 @@ export class gameboard {
   // need to write function for creating ship and placing it
   // create ship
   placeShip(name, start, dir) {
+    const livesMap = {
+    aircraft: 5,
+    battleship: 4,
+    cruiser: 3,
+    sub: 3,
+    destroyer: 2,
+    };
+    const lives = livesMap[name];
+    
+    const validity = this.isPlacementValid(name, start, dir);
     if (dir === "lat") {
       // place ship
-      if (this.isPlacementValid(name, start, dir)) {
+      if (validity) {
         for (let i = 0; i < lives; i++) {
           this.board[start + i].shipName = name;
         }
@@ -22,14 +32,14 @@ export class gameboard {
     }
 
     if (dir === "vert") {
-      if (this.isPlacementValid(name, start. dir)) {
+      if (validity) {
         for (let i = 0; i < lives * 10; i += 10) {
           this.board[start + i].shipName = name;
         }
       }
     }
 
-    if (validPosition) {
+    if (validity) {
       this.ships[name] = new ship(name, lives);
     }
   }
@@ -64,6 +74,7 @@ export class gameboard {
       for (let i = 0; i < lives; i++) {
         if (this.board[start + i].shipName) return (validPosition = false);
       }
+      return validPosition;
     }
 
     if (dir === "vert") {
