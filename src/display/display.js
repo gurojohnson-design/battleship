@@ -58,6 +58,7 @@ export function displayCpuBoard(cpu, player) {
         // check for gameover
         if (cpu.gameboard.allSunk()) {
           alert("Game Over! Player Wins!");
+          gameDisplay.style.display = 'none';
           return;
         }
 
@@ -73,6 +74,7 @@ export function displayCpuBoard(cpu, player) {
         // check for gameover
         if (player.gameboard.allSunk()) {
           alert("Game Over! The CPU wins!");
+          gameDisplay.style.display = 'none';
           return;
         }
       });

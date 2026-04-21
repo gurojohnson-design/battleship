@@ -1,23 +1,20 @@
-# Template
+# Battleship
 
-The go to template to set up webpack and other dependencies for projects.
+note to self:
 
-Don't forget to install webpack and other things from package.json!
+overall plan right now
 
-Good Luck!
+    Need a landing page with title and name input — name input generates player object
 
-gh-pages install
+    Eventually need to incorporate a two player version that will be addressed on landing page
 
-    npm install gh-pages --save-dev
+    Need a ship placement page where ships are placed — prompt for each ships placement 
 
-ESLint install
 
-    npm init @eslint/config@latest
+    Need a game page where the game is played
 
-Prettier install
+    Victory message
 
-    npm install --save-dev --save-exact prettier
+specific plan right now
 
-Babel install
-
-    npm install --save-dev @babel/preset-env
+    swtiched branches in git to plug the landing page inputs into the existing framework without breaking anything. commit often and don't diverge too far without merging.

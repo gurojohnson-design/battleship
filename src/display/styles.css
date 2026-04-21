@@ -1,5 +1,33 @@
 body {
     box-sizing: border-box;
+    background-color: rgb(3, 3, 133);
+    width: 100%;
+}
+
+.title {
+    justify-self: center;
+    font-size: 3em;
+    color: rgb(172, 172, 172);
+}
+
+.input, #name, #submitBtn {
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+}
+
+#name {
+    color: black;
+}
+
+#form {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 40%;
+    justify-content: center;
+    gap: 1rem;
+    justify-self: center;
+
 }
 
 .cell, .cpuCell {
@@ -10,6 +38,7 @@ body {
 }
 
 #gameDisplay {
+    display: none;
     width: 100%;
     border: 1px solid red;
     display: grid;
