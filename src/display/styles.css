@@ -1,7 +1,6 @@
 body {
     box-sizing: border-box;
     background-color: rgb(3, 3, 133);
-    width: 100%;
 }
 
 .title {
@@ -39,7 +38,6 @@ body {
 
 #gameDisplay {
     display: none;
-    width: 100%;
     border: 1px solid red;
     display: grid;
     grid-template-columns: 1fr 1fr;

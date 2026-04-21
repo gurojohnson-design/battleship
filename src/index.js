@@ -8,9 +8,15 @@ const startBtn = document.getElementById("startBtn");
 
 startBtn.addEventListener("click", (event) => {
   event.preventDefault();
-  document.getElementById('formContainer').style.display = 'none';
   const user = document.getElementById('name').value;
-  startGame(user)
+
+  if (!user) {
+    return;
+  } else {
+    document.getElementById('formContainer').style.display = 'none';
+    const user = document.getElementById('name').value;
+    startGame(user);
+  };
 });
 
 function startGame(name) {
