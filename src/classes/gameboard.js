@@ -12,12 +12,36 @@ export class gameboard {
   // need to write function for creating ship and placing it
   // create ship
   placeShip(name, start, dir) {
+    if (dir === "lat") {
+      // place ship
+      if (this.isPlacementValid(name, start, dir)) {
+        for (let i = 0; i < lives; i++) {
+          this.board[start + i].shipName = name;
+        }
+      }
+    }
+
+    if (dir === "vert") {
+      if (this.isPlacementValid(name, start. dir)) {
+        for (let i = 0; i < lives * 10; i += 10) {
+          this.board[start + i].shipName = name;
+        }
+      }
+    }
+
+    if (validPosition) {
+      this.ships[name] = new ship(name, lives);
+    }
+  }
+
+  // check placement validity
+  isPlacementValid(name, start, dir) {
     const livesMap = {
-      aircraft: 5,
-      battleship: 4,
-      cruiser: 3,
-      sub: 3,
-      destroyer: 2,
+    aircraft: 5,
+    battleship: 4,
+    cruiser: 3,
+    sub: 3,
+    destroyer: 2,
     };
     const lives = livesMap[name];
 
@@ -26,7 +50,6 @@ export class gameboard {
     for (let i = 9; i < 100; i += 10) {
       rowEnds.push(i);
     }
-
     // place the ship in the right direction-- handle invalid placements
     let validPosition = false;
     if (dir === "lat") {
@@ -41,31 +64,19 @@ export class gameboard {
       for (let i = 0; i < lives; i++) {
         if (this.board[start + i].shipName) return (validPosition = false);
       }
-      // place ship
-      if (validPosition) {
-        for (let i = 0; i < lives; i++) {
-          this.board[start + i].shipName = name;
-        }
-      }
     }
 
     if (dir === "vert") {
-      if (start + lives * 10 < 100) {
-        validPosition = true;
-        for (let i = 0; i < lives * 10; i += 10) {
-          if (this.board[start + i].shipName) {
-            return (validPosition = false);
-          }
-        }
-        for (let i = 0; i < lives * 10; i += 10) {
-          this.board[start + i].shipName = name;
+    if (start + lives * 10 < 100) {
+      validPosition = true;
+      for (let i = 0; i < lives * 10; i += 10) {
+        if (this.board[start + i].shipName) {
+          return (validPosition = false);
         }
       }
     }
-
-    if (validPosition) {
-      this.ships[name] = new ship(name, lives);
-    }
+    return validPosition;
+    };
   }
 
   // receivesHit(coordinates) checks if shot is a hit/miss and logs missed shot or hit on ship
