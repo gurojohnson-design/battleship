@@ -1,4 +1,5 @@
 export const gameDisplay = document.createElement("div");
+gameDisplay.id = 'gameDisplay';
 document.body.append(gameDisplay);
 
 export function displayPlayerBoard(activePlayer) {
@@ -24,7 +25,7 @@ export function displayPlayerBoard(activePlayer) {
 
 export function displayCpuBoard(cpu, player) {
   const cpuBoardContainer = document.createElement("div");
-  cpuBoardContainer.id = "cpuBoard";
+  cpuBoardContainer.id = "cpuBoardContainer";
 
   gameDisplay.append(cpuBoardContainer);
 
@@ -48,6 +49,9 @@ export function displayCpuBoard(cpu, player) {
         // click and player shoots cpu
         cpu.gameboard.receivesHit(index);
 
+        //clear cpu board
+        cpuBoardContainer.remove();
+
         // re render cpu board
         displayCpuBoard(cpu, player);
 
@@ -59,6 +63,9 @@ export function displayCpuBoard(cpu, player) {
 
         // cpu shoots player
         player.randomCpuHit();
+
+        // clear player board
+        document.getElementById('playerBoardContainer').remove();
 
         // re render player board
         displayPlayerBoard(player);

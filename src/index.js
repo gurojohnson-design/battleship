@@ -7,7 +7,7 @@ import { gameDisplay, displayPlayerBoard, displayCpuBoard } from "./display/disp
 const startBtn = document.createElement("button");
 startBtn.id = "startBtn";
 startBtn.textContent = 'Start Game'
-gameDisplay.append(startBtn);
+document.body.append(startBtn);
 
 startBtn.addEventListener("click", startGame);
 
@@ -35,6 +35,7 @@ function startGame() {
   cpu.gameboard.placeShip("sub", 30, "lat");
   cpu.gameboard.placeShip("destroyer", 40, "lat");
 
+  gameDisplay.textContent= '';
   // display boards with ships
   displayPlayerBoard(user);
   displayCpuBoard(cpu, user);

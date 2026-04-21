@@ -1,0 +1,39 @@
+body {
+    box-sizing: border-box;
+}
+
+.cell, .cpuCell {
+    min-height: 20px;
+    min-width: 50px;
+    background-color: red;
+    display: flex;
+}
+
+#gameDisplay {
+    width: 100%;
+    border: 1px solid red;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#playerBoardContainer {
+    width: 37.25%;
+    border: 3px solid green;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 3px;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+#cpuBoardContainer {
+    width: 37.25%;
+    border: 3px solid blue;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 3px;
+    grid-column: 2 / 3;
+}
