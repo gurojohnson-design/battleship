@@ -14,5 +14,7 @@ export class player {
     while (!this.gameboard.receivesHit(randomIndex)) {
       randomIndex = Math.floor(Math.random() * 100);
     }
+    // return randomIndex for testing
+    return randomIndex;
   }
 }
