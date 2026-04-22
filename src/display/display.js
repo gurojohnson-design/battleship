@@ -1,3 +1,5 @@
+import { player } from "../classes/player";
+
 export const gameDisplay = document.createElement("div");
 gameDisplay.id = 'gameDisplay';
 document.body.append(gameDisplay);
@@ -24,6 +26,10 @@ export function displayPlayerBoard(activePlayer) {
 }
 
 // recreate displayPlayerBoard() for placement purposes
+  let currentShipIndex = 0;
+  const ships = ['aircraft', 'battleship', 'cruiser', 'sub', 'destroyer'];
+  let direction = 'lat';
+
 export function displayPlacementBoard (activePlayer) {
   const placementBoardContainer = document.createElement("div");
   placementBoardContainer.id = "placementBoardContainer";
@@ -42,12 +48,7 @@ export function displayPlacementBoard (activePlayer) {
     }
   })
 
-
   const board = activePlayer.gameboard.board;
-
-  let currentShipIndex = 0;
-  const ships = ['aircraft', 'battleship', 'cruiser', 'sub', 'destroyer'];
-  let direction = 'lat';
 
   board.forEach((item, index) => {
     const cell = document.createElement("div");
@@ -74,7 +75,7 @@ export function displayPlacementBoard (activePlayer) {
     })
 
     cell.addEventListener('mouseleave', () => {
-      cell.style.backgroundColor = 'light grey';
+      cell.style.backgroundColor = 'lightgrey';
     })
 
 
@@ -83,6 +84,8 @@ export function displayPlacementBoard (activePlayer) {
 
   if (currentShipIndex === 5) {
     gameDisplay.textContent = '';
+    displayPlayerBoard(activePlayer);
+    displayCpuBoard(cpu, activePlayer)
   }
 }
 
