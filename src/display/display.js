@@ -30,7 +30,7 @@ export function displayPlayerBoard(activePlayer) {
   const ships = ['aircraft', 'battleship', 'cruiser', 'sub', 'destroyer'];
   let direction = 'lat';
 
-export function displayPlacementBoard (activePlayer) {
+export function displayPlacementBoard (activePlayer, cpu) {
   const placementBoardContainer = document.createElement("div");
   placementBoardContainer.id = "placementBoardContainer";
 
@@ -63,7 +63,7 @@ export function displayPlacementBoard (activePlayer) {
     cell.addEventListener('click', () => {
       activePlayer.gameboard.placeShip(ships[currentShipIndex], index, direction);
       currentShipIndex++;
-      displayPlacementBoard(activePlayer);
+      displayPlacementBoard(activePlayer, cpu);
     })
 
     cell.addEventListener('mouseenter', () => {
@@ -90,7 +90,7 @@ export function displayPlacementBoard (activePlayer) {
 }
 
 
-
+// need cpu to randomly place it's own ships
 
 export function displayCpuBoard(cpu, player) {
   const cpuBoardContainer = document.createElement("div");
