@@ -19,10 +19,14 @@ startBtn.addEventListener("click", (event) => {
   };
 });
 
+// define players globally for cross function access
+let user;
+let cpu;
+
 function startGame(name) {
   // make players
-  const user = new player(`${name}`, "player");
-  const cpu = new player("cpu", "cpu");
+  user = new player(`${name}`, "player");
+  cpu = new player("cpu", "cpu");
 
   // show gameDisplay
   gameDisplay.style.display = 'grid';

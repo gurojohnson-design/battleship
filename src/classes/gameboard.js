@@ -11,9 +11,9 @@ export class gameboard {
 
   // need to write function for creating ship and placing it
   // create ship
-  placeShip(name, start, dir) {
+  placeShip(name, start, dir = 'lat') {
     const livesMap = {
-    aircraft: 5,
+    carrier: 5,
     battleship: 4,
     cruiser: 3,
     sub: 3,
@@ -47,7 +47,7 @@ export class gameboard {
   // check placement validity
   isPlacementValid(name, start, dir) {
     const livesMap = {
-    aircraft: 5,
+    carrier: 5,
     battleship: 4,
     cruiser: 3,
     sub: 3,

@@ -17,4 +17,6 @@ overall plan right now
 
 specific plan right now
 
-    swtiched branches in git to plug the landing page inputs into the existing framework without breaking anything. commit often and don't diverge too far without merging.
+    swtiched branches in git to make the ship placement page. separated form validity checks from placeShip() so it can be used in the highlighting for ship placement UI. testing passed so now its about tying it into the DOM and generating the page i need.
+
+    we're doing a prompted ship placement so 'user, you need to place whatever ship' and probably multiple 'ship placement pages'

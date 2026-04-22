@@ -23,6 +23,72 @@ export function displayPlayerBoard(activePlayer) {
   gameDisplay.append(playerBoardContainer);
 }
 
+// recreate displayPlayerBoard() for placement purposes
+export function displayPlacementBoard (activePlayer) {
+  const placementBoardContainer = document.createElement("div");
+  placementBoardContainer.id = "placementBoardContainer";
+
+  placementBoardContainer.textContent = "";
+
+  // axis flip button
+  const axisBtn = document.createElement('button');
+  axisBtn.id = 'axisBtn';
+  
+  axisBtn.addEventListener('click', () => {
+    if (direction === 'lat') {
+      direction = 'vert';
+    } else if (direction === 'vert') {
+      direction = 'lat';
+    }
+  })
+
+
+  const board = activePlayer.gameboard.board;
+
+  let currentShipIndex = 0;
+  const ships = ['aircraft', 'battleship', 'cruiser', 'sub', 'destroyer'];
+  let direction = 'lat';
+
+  board.forEach((item, index) => {
+    const cell = document.createElement("div");
+    cell.classList.add("cell");
+    cell.id = `${index}`;
+    placementBoardContainer.append(cell);
+
+    if (item.shipName) cell.textContent = `${item.shipName}`;
+
+    // add event listeners for placement
+
+    cell.addEventListener('click', () => {
+      activePlayer.gameboard.placeShip(ships[currentShipIndex], index, direction);
+      currentShipIndex++;
+      displayPlacementBoard(activePlayer);
+    })
+
+    cell.addEventListener('mouseenter', () => {
+      if (activePlayer.gameboard.isPlacementValid(ships[currentShipIndex], index, direction)) {
+        cell.style.backgroundColor = 'lightgreen';
+      } else {
+        cell.style.backgroundColor = 'lightcoral';
+      }
+    })
+
+    cell.addEventListener('mouseleave', () => {
+      cell.style.backgroundColor = 'light grey';
+    })
+
+
+  });
+  gameDisplay.append(axisBtn, placementBoardContainer);
+
+  if (currentShipIndex === 5) {
+    gameDisplay.textContent = '';
+  }
+}
+
+
+
+
 export function displayCpuBoard(cpu, player) {
   const cpuBoardContainer = document.createElement("div");
   cpuBoardContainer.id = "cpuBoardContainer";
