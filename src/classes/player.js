@@ -9,12 +9,15 @@ export class player {
   // random attacks for cpu
   // runs receivesHit(coordinate) where coordinate is random number from 1-100 and if receivesHit() returns false it picks a new number
   randomCpuHit() {
-    let randomIndex = Math.floor(Math.random() * 100);
-
-    while (!this.gameboard.receivesHit(randomIndex)) {
+    let randomIndex;
+    let result = false;
+    while (!result) {
+      console.log('trying index:', randomIndex);
       randomIndex = Math.floor(Math.random() * 100);
+      result = this.gameboard.receivesHit(randomIndex);
     }
-    // return randomIndex for testing
     return randomIndex;
   }
+
+
 }

@@ -5,11 +5,15 @@ export function randomShipPlacement(activePlayer) {
     let directionChoice = ['lat', 'vert'];
 
     ships.forEach((ship) => {
-        // for each ship were going to generate a random coordinate and choose a random direction and place ship at that coordinate and direction on the activeplayer gameboard
-        coordinates = Math.floor(Math.random() * 100);
-        direction = Math.floor(Math.random() * 2);
-
-        activePlayer.gameboard.placeShip(ship, coordinates, directionChoice[direction]);
-    })
-
+        let placed = false;
+        while (!placed) {
+            coordinates = Math.floor(Math.random() * 100);
+            direction = Math.floor(Math.random() * 2);
+            
+            if (activePlayer.gameboard.isPlacementValid(ship, coordinates, directionChoice[direction])) {
+                activePlayer.gameboard.placeShip(ship, coordinates, directionChoice[direction]);
+                placed = true;
+            };
+        };
+    });
 }

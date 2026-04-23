@@ -103,8 +103,6 @@ export function displayCpuBoard(cpu, player) {
 
   cpuBoardContainer.textContent = "";
 
-  randomShipPlacement(cpu);
-
   const board = cpu.gameboard.board;
 
   board.forEach((item, index) => {

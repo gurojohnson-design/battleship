@@ -71,8 +71,10 @@ export class gameboard {
         }
       }
       // check that it doesn't collide
-      for (let i = 0; i < lives; i++) {
-        if (this.board[start + i].shipName) return (validPosition = false);
+      if (validPosition) {
+        for (let i = 0; i < lives; i++) {
+          if (this.board[start + i].shipName) return (validPosition = false);
+        };
       }
       return validPosition;
     }

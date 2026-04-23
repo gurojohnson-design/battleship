@@ -1,7 +1,7 @@
 import "./display/styles.css";
 import { player } from "./classes/player.js";
 import { gameDisplay, displayPlacementBoard } from "./display/display.js";
-
+import { randomShipPlacement } from "./randomShipPlacement.js";
 
 // create players-- place ships-- display boards
 // start button to kick off function
@@ -31,6 +31,7 @@ function startGame(name) {
   user = new player(`${name}`, 'player');
   cpu = new player('cpu', 'cpu');
 
+  randomShipPlacement(cpu);
 
   // make player, handle ship placement, transition game
   displayPlacementBoard(user, cpu);
