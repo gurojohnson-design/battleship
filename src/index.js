@@ -1,7 +1,7 @@
 import "./display/styles.css";
 import { player } from "./classes/player.js";
-import { gameDisplay, displayPlayerBoard, displayCpuBoard, displayPlacementBoard } from "./display/display.js";
-import { shipPlacement } from "./shipPlacement.js";
+import { gameDisplay, displayPlacementBoard } from "./display/display.js";
+
 
 // create players-- place ships-- display boards
 // start button to kick off function

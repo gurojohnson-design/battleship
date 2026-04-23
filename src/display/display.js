@@ -1,4 +1,5 @@
-import { player } from "../classes/player";
+import { randomShipPlacement } from "../randomShipPlacement.js";
+
 
 export const gameDisplay = document.createElement("div");
 gameDisplay.id = 'gameDisplay';
@@ -27,7 +28,7 @@ export function displayPlayerBoard(activePlayer) {
 
 // recreate displayPlayerBoard() for placement purposes
   let currentShipIndex = 0;
-  const ships = ['aircraft', 'battleship', 'cruiser', 'sub', 'destroyer'];
+  const ships = ['carrier', 'battleship', 'cruiser', 'sub', 'destroyer'];
   let direction = 'lat';
 
 export function displayPlacementBoard (activePlayer, cpu) {
@@ -63,6 +64,8 @@ export function displayPlacementBoard (activePlayer, cpu) {
     cell.addEventListener('click', () => {
       activePlayer.gameboard.placeShip(ships[currentShipIndex], index, direction);
       currentShipIndex++;
+      axisBtn.remove();
+      placementBoardContainer.remove();
       displayPlacementBoard(activePlayer, cpu);
     })
 
@@ -99,6 +102,8 @@ export function displayCpuBoard(cpu, player) {
   gameDisplay.append(cpuBoardContainer);
 
   cpuBoardContainer.textContent = "";
+
+  randomShipPlacement(cpu);
 
   const board = cpu.gameboard.board;
 

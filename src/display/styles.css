@@ -29,6 +29,10 @@ body {
 
 }
 
+#placementBoardContainer{
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
 .cell, .cpuCell {
     min-height: 20px;
     min-width: 50px;
