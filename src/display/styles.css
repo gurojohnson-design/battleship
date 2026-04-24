@@ -36,7 +36,7 @@ body {
 .cell, .cpuCell {
     min-height: 20px;
     min-width: 50px;
-    background-color: red;
+    background-color: grey;
     display: flex;
 }
 
@@ -67,4 +67,34 @@ body {
     grid-template-columns: repeat(10, 1fr);
     gap: 3px;
     grid-column: 2 / 3;
+}
+
+.cell--hit::after {
+    content: '✕';
+    color: red;
+}
+
+.cell--miss::after {
+    content: '○';
+    color: white;
+}
+
+.cell--carrier {
+    background-color: rgb(255, 0, 0, .7);
+}
+
+.cell--battleship {
+    background-color: rgb(255, 165, 0, .7);
+}
+
+.cell--cruiser {
+    background-color: rgb(255, 255, 0, .7);
+}
+
+.cell--sub {
+    background-color: rgb(0, 128, 0, .7);
+}
+
+.cell--destroyer {
+    background-color: rgb(0, 0, 255, .7);
 }

@@ -19,14 +19,20 @@ export function displayPlayerBoard(activePlayer) {
     cell.id = `${index}`;
     playerBoardContainer.append(cell);
 
-    if (item.isHit && item.shipName) cell.textContent = "X on ship name";
-    if (item.isHit && !item.shipName) cell.textContent = "O missed shot";
-    if (!item.isHit && item.shipName) cell.textContent = "a ship is here";
+    if (item.isHit && item.shipName) cell.classList.add('cell--hit');
+    if (item.isHit && !item.shipName) cell.classList.add('cell--miss');
+    if (!item.isHit && item.shipName) {
+      if (item.shipName === 'carrier') cell.classList.add('cell--carrier');
+      if (item.shipName === 'battleship') cell.classList.add('cell--battleship');
+      if (item.shipName === 'cruiser') cell.classList.add('cell--cruiser');
+      if (item.shipName === 'sub') cell.classList.add('cell--sub');
+      if (item.shipName === 'destroyer') cell.classList.add('cell--destroyer')
+    }
   });
   gameDisplay.append(playerBoardContainer);
 }
 
-// recreate displayPlayerBoard() for placement purposes
+  // recreate displayPlayerBoard() for placement purposes
   let currentShipIndex = 0;
   const ships = ['carrier', 'battleship', 'cruiser', 'sub', 'destroyer'];
   let direction = 'lat';
@@ -167,8 +173,8 @@ export function displayCpuBoard(cpu, player) {
     cpuBoardContainer.append(cpuCell);
 
     // check condition and display accordingly
-    if (item.isHit && item.shipName) cpuCell.textContent = "X on ship name";
-    if (item.isHit && !item.shipName) cpuCell.textContent = "O missed shot";
+    if (item.isHit && item.shipName) cpuCell.classList.add('cell--hit');
+    if (item.isHit && !item.shipName) cpuCell.classList.add('cell--miss');
 
     // add event listener per cell that has not been shot
     if (!item.isHit) {
@@ -185,6 +191,7 @@ export function displayCpuBoard(cpu, player) {
         // check for gameover
         if (cpu.gameboard.allSunk()) {
           alert("Game Over! Player Wins!");
+          window.location.reload();
           // gameDisplay.style.display = 'none';
           return;
         }
@@ -201,6 +208,7 @@ export function displayCpuBoard(cpu, player) {
         // check for gameover
         if (player.gameboard.allSunk()) {
           alert("Game Over! The CPU wins!");
+          window.location.reload();
           // gameDisplay.style.display = 'none';
           return;
         }
