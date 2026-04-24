@@ -70,8 +70,10 @@ export function displayPlacementBoard (activePlayer, cpu) {
 
     // event listener for ship placement
     cell.addEventListener('click', () => {
-      activePlayer.gameboard.placeShip(ships[currentShipIndex], index, direction);
-      currentShipIndex++;
+      if (activePlayer.gameboard.isPlacementValid(ships[currentShipIndex], index, direction)) {
+        activePlayer.gameboard.placeShip(ships[currentShipIndex], index, direction);
+        currentShipIndex++;
+        }
       axisBtn.remove();
       placementBoardContainer.remove();
       displayPlacementBoard(activePlayer, cpu);
@@ -131,13 +133,13 @@ export function displayPlacementBoard (activePlayer, cpu) {
         if (direction === 'lat') {
           for (let i = 0; i < lives; i++) {
             let targetCell = document.getElementById(`${index + i}`);
-            if (targetCell) targetCell.style.backgroundColor = 'lightgrey';
+            if (targetCell) targetCell.style.backgroundColor = 'rgb(172, 172, 172)';
           }
         }
         if (direction === 'vert') {
           for (let i = 0; i < lives; i++) {
             let targetCell = document.getElementById(`${index + i * 10}`);
-            if (targetCell) targetCell.style.backgroundColor = 'lightgrey';
+            if (targetCell) targetCell.style.backgroundColor = 'rgb(172, 172, 172)';
           }
         }
     })

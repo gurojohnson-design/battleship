@@ -36,14 +36,13 @@ body {
 .cell, .cpuCell {
     min-height: 20px;
     min-width: 50px;
-    background-color: grey;
+    background-color: rgb(172, 172, 172);
     display: flex;
 }
 
 #gameDisplay {
     display: none;
     border: 1px solid red;
-    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5%;
     padding-left: 10%;
