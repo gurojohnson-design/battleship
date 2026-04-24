@@ -32,10 +32,10 @@ export function displayPlayerBoard(activePlayer) {
   gameDisplay.append(playerBoardContainer);
 }
 
-  // recreate displayPlayerBoard() for placement purposes
-  let currentShipIndex = 0;
-  const ships = ['carrier', 'battleship', 'cruiser', 'sub', 'destroyer'];
-  let direction = 'lat';
+// recreate displayPlayerBoard() for placement purposes
+let currentShipIndex = 0;
+const ships = ['carrier', 'battleship', 'cruiser', 'sub', 'destroyer'];
+let direction = 'lat';
 
 export function displayPlacementBoard (activePlayer, cpu) {
   const placementBoardContainer = document.createElement("div");
@@ -74,8 +74,7 @@ export function displayPlacementBoard (activePlayer, cpu) {
         activePlayer.gameboard.placeShip(ships[currentShipIndex], index, direction);
         currentShipIndex++;
         }
-      axisBtn.remove();
-      placementBoardContainer.remove();
+        gameDisplay.textContent= '';
       displayPlacementBoard(activePlayer, cpu);
     })
 
@@ -146,7 +145,16 @@ export function displayPlacementBoard (activePlayer, cpu) {
 
 
   });
-  gameDisplay.append(axisBtn, placementBoardContainer);
+
+  let shipMessage = document.createElement('div');
+  shipMessage.id = 'shipMessage';
+  shipMessage.textContent = `Captain ${activePlayer.name} place your ${ships[currentShipIndex]}`;
+  
+  const bodyContainer = document.getElementById('bodyContainer')
+
+
+
+  gameDisplay.append(shipMessage, axisBtn, placementBoardContainer);
 
   if (currentShipIndex === 5) {
     gameDisplay.textContent = '';
