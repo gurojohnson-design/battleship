@@ -65,7 +65,7 @@ export class gameboard {
     if (dir === "lat") {
       // check that it doesn't wrap rows
       for (let i = 0; i < rowEnds.length; i++) {
-        if (start + lives <= rowEnds[i] && start >= rowEnds[i] - 9) {
+        if (start + lives - 1 <= rowEnds[i] && start >= rowEnds[i] - 9) {
           validPosition = true;
           break;
         }
@@ -80,7 +80,7 @@ export class gameboard {
     }
 
     if (dir === "vert") {
-    if (start + lives * 10 < 100) {
+    if (start + (lives - 1) * 10 < 100) {
       validPosition = true;
       for (let i = 0; i < lives * 10; i += 10) {
         if (this.board[start + i].shipName) {

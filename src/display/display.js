@@ -40,6 +40,7 @@ export function displayPlacementBoard (activePlayer, cpu) {
   // axis flip button
   const axisBtn = document.createElement('button');
   axisBtn.id = 'axisBtn';
+  axisBtn.textContent = 'Change Ship Direction'
   
   axisBtn.addEventListener('click', () => {
     if (direction === 'lat') {
@@ -61,6 +62,7 @@ export function displayPlacementBoard (activePlayer, cpu) {
 
     // add event listeners for placement
 
+    // event listener for ship placement
     cell.addEventListener('click', () => {
       activePlayer.gameboard.placeShip(ships[currentShipIndex], index, direction);
       currentShipIndex++;
@@ -69,16 +71,69 @@ export function displayPlacementBoard (activePlayer, cpu) {
       displayPlacementBoard(activePlayer, cpu);
     })
 
+    // highlight placement spot with valid or invalid
     cell.addEventListener('mouseenter', () => {
+      const livesMap = {
+        carrier: 5,
+        battleship: 4,
+        cruiser: 3,
+        sub: 3,
+        destroyer: 2,
+      };
+      const lives = livesMap[ships[currentShipIndex]];
+
       if (activePlayer.gameboard.isPlacementValid(ships[currentShipIndex], index, direction)) {
-        cell.style.backgroundColor = 'lightgreen';
+        if (direction === 'lat') {
+          for (let i = 0; i < lives; i++) {
+            let targetCell = document.getElementById(`${index + i}`);
+            if (targetCell) targetCell.style.backgroundColor = 'lightgreen';
+          }
+        }
+        if (direction === 'vert') {
+          for (let i = 0; i < lives; i++) {
+            let targetCell = document.getElementById(`${index + i * 10}`);
+            if (targetCell) targetCell.style.backgroundColor = 'lightgreen';
+          }
+        }
       } else {
-        cell.style.backgroundColor = 'lightcoral';
+        if (direction === 'lat') {
+          for (let i = 0; i < lives; i++) {
+            let targetCell = document.getElementById(`${index + i}`);
+            if (targetCell) targetCell.style.backgroundColor = 'lightcoral';
+          }
+        }
+        if (direction === 'vert') {
+          for (let i = 0; i < lives; i++) {
+            let targetCell = document.getElementById(`${index + i * 10}`);
+            if (targetCell) targetCell.style.backgroundColor = 'lightcoral';
+          }
+        }
       }
     })
 
+    // remove highlighting
     cell.addEventListener('mouseleave', () => {
-      cell.style.backgroundColor = 'lightgrey';
+      const livesMap = {
+        carrier: 5,
+        battleship: 4,
+        cruiser: 3,
+        sub: 3,
+        destroyer: 2,
+      };
+      const lives = livesMap[ships[currentShipIndex]];
+
+        if (direction === 'lat') {
+          for (let i = 0; i < lives; i++) {
+            let targetCell = document.getElementById(`${index + i}`);
+            if (targetCell) targetCell.style.backgroundColor = 'lightgrey';
+          }
+        }
+        if (direction === 'vert') {
+          for (let i = 0; i < lives; i++) {
+            let targetCell = document.getElementById(`${index + i * 10}`);
+            if (targetCell) targetCell.style.backgroundColor = 'lightgrey';
+          }
+        }
     })
 
 
@@ -130,7 +185,7 @@ export function displayCpuBoard(cpu, player) {
         // check for gameover
         if (cpu.gameboard.allSunk()) {
           alert("Game Over! Player Wins!");
-          gameDisplay.style.display = 'none';
+          // gameDisplay.style.display = 'none';
           return;
         }
 
@@ -146,7 +201,7 @@ export function displayCpuBoard(cpu, player) {
         // check for gameover
         if (player.gameboard.allSunk()) {
           alert("Game Over! The CPU wins!");
-          gameDisplay.style.display = 'none';
+          // gameDisplay.style.display = 'none';
           return;
         }
       });
