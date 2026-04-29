@@ -21,7 +21,7 @@ export function displayPlayerBoard(activePlayer) {
 
     if (item.isHit && item.shipName) cell.classList.add('cell--hit');
     if (item.isHit && !item.shipName) cell.classList.add('cell--miss');
-    if (!item.isHit && item.shipName) {
+    if (item.shipName) {
       if (item.shipName === 'carrier') cell.classList.add('cell--carrier');
       if (item.shipName === 'battleship') cell.classList.add('cell--battleship');
       if (item.shipName === 'cruiser') cell.classList.add('cell--cruiser');
@@ -64,8 +64,13 @@ export function displayPlacementBoard (activePlayer, cpu) {
     cell.id = `${index}`;
     placementBoardContainer.append(cell);
 
-    if (item.shipName) cell.textContent = `${item.shipName}`;
-
+    if (item.shipName) {
+      if (item.shipName === 'carrier') cell.classList.add('cell--carrier');
+      if (item.shipName === 'battleship') cell.classList.add('cell--battleship');
+      if (item.shipName === 'cruiser') cell.classList.add('cell--cruiser');
+      if (item.shipName === 'sub') cell.classList.add('cell--sub');
+      if (item.shipName === 'destroyer') cell.classList.add('cell--destroyer')
+    }
     // add event listeners for placement
 
     // event listener for ship placement
@@ -132,13 +137,13 @@ export function displayPlacementBoard (activePlayer, cpu) {
         if (direction === 'lat') {
           for (let i = 0; i < lives; i++) {
             let targetCell = document.getElementById(`${index + i}`);
-            if (targetCell) targetCell.style.backgroundColor = 'rgb(172, 172, 172)';
+            if (targetCell) targetCell.style.backgroundColor = '';
           }
         }
         if (direction === 'vert') {
           for (let i = 0; i < lives; i++) {
             let targetCell = document.getElementById(`${index + i * 10}`);
-            if (targetCell) targetCell.style.backgroundColor = 'rgb(172, 172, 172)';
+            if (targetCell) targetCell.style.backgroundColor = '';
           }
         }
     })
@@ -148,7 +153,7 @@ export function displayPlacementBoard (activePlayer, cpu) {
 
   let shipMessage = document.createElement('div');
   shipMessage.id = 'shipMessage';
-  shipMessage.textContent = `Captain ${activePlayer.name} place your ${ships[currentShipIndex]}`;
+  shipMessage.textContent = `Captain ${activePlayer.name}, place your ${ships[currentShipIndex]}`;
   
   const bodyContainer = document.getElementById('bodyContainer')
 
@@ -185,6 +190,7 @@ export function displayCpuBoard(cpu, player) {
     // check condition and display accordingly
     if (item.isHit && item.shipName) cpuCell.classList.add('cell--hit');
     if (item.isHit && !item.shipName) cpuCell.classList.add('cell--miss');
+    if (!item.isHit) cpuCell.classList.add('cell--valid');
 
     // add event listener per cell that has not been shot
     if (!item.isHit) {
