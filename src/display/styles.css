@@ -75,6 +75,7 @@ button:hover {
 }
 #gameDisplay {
     display: none;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
     padding-left: 10%;
     padding-right: 10%;

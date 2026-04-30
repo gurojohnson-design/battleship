@@ -170,6 +170,7 @@ export function displayPlacementBoard (activePlayer, cpu) {
 
 
 // need cpu to randomly place it's own ships
+let cpuTurnPending = false;
 
 export function displayCpuBoard(cpu, player) {
   const cpuBoardContainer = document.createElement("div");
@@ -195,39 +196,44 @@ export function displayCpuBoard(cpu, player) {
     // add event listener per cell that has not been shot
     if (!item.isHit) {
       cpuCell.addEventListener("click", () => {
+        if (cpuTurnPending) return;
+        cpuTurnPending = true;
+
         // click and player shoots cpu
         cpu.gameboard.receivesHit(index);
 
-        //clear cpu board
-        cpuBoardContainer.remove();
-
         // re render cpu board
         displayCpuBoard(cpu, player);
+
+        //clear cpu board
+        cpuBoardContainer.remove();
 
         // check for gameover
         if (cpu.gameboard.allSunk()) {
           alert("Game Over! Player Wins!");
           window.location.reload();
-          // gameDisplay.style.display = 'none';
           return;
         }
 
-        // cpu shoots player
-        player.randomCpuHit();
+        setTimeout(() => {
+          // cpu shoots player
+          player.randomCpuHit();
 
-        // clear player board
-        document.getElementById('playerBoardContainer').remove();
+          // clear player board
+          document.getElementById('playerBoardContainer').remove();
+  
+          // re render player board
+          displayPlayerBoard(player);
 
-        // re render player board
-        displayPlayerBoard(player);
-
-        // check for gameover
-        if (player.gameboard.allSunk()) {
-          alert("Game Over! The CPU wins!");
-          window.location.reload();
-          // gameDisplay.style.display = 'none';
-          return;
-        }
+          // check for gameover
+          if (player.gameboard.allSunk()) {
+            alert("Game Over! The CPU wins!");
+            window.location.reload();
+            // gameDisplay.style.display = 'none';
+            return;
+          }
+          cpuTurnPending = false;
+        }, 500);
       });
     }
   });
